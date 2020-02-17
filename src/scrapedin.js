@@ -27,11 +27,24 @@ module.exports = async ({ cookies, email, password, isHeadless, hasToLog, hasToG
     logger.warn('scrapedin', 'email/password and cookies wasn\'t provided, only public data will be collected')
   }
 
-  return (url, waitMs) => profile(browser, cookies, url, waitMs, hasToGetContactInfo)
+  const token = await getToken(browser)
+  browser.close()
+  return token
+
+  // return (url, waitMs) => profile(browser, cookies, url, waitMs, hasToGetContactInfo)
 }
 
-exports.getToken = () => {
-  console.log('getToken')
+const getToken = async (browser) => {
+  logger.info('scrapedin', 'getting user token')
 
-  return 'asdsadas'
+  const linkedin = 'https://www.linkedin.com'
+  const page = await browser.newPage()
+
+  await page.goto(linkedin)
+
+  const linkedinCookies = await page.cookies()
+
+  const token = linkedinCookies.find(c => c.name === 'li_at')
+
+  return token && token.value
 }
