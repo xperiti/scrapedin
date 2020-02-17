@@ -14,12 +14,12 @@ module.exports = async (browser, email, password) => {
   await page.$('#password')
     .then((passwordElement) => passwordElement.type(password))
 
-  await page.$x("//button[contains(text(), 'Sign in')]")
+  await page.$x('//button[contains(text(), \'Sign in\')]')
     .then((button) => button[0].click())
 
   return page.waitFor('input[role=combobox]', {
     timeout: 15000
-    })
+  })
     .then(async () => {
       logger.info('login', 'logged feed page selector found')
       await page.close()
