@@ -28,7 +28,7 @@ module.exports = async ({ cookies, email, password, isHeadless, hasToLog, hasToG
   }
 
   const token = await getToken(browser)
-  browser.close()
+  await browser.close()
   return token
 
   // return (url, waitMs) => profile(browser, cookies, url, waitMs, hasToGetContactInfo)
