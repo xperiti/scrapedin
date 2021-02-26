@@ -13,7 +13,7 @@ module.exports = async ({ cookies, email, password, isHeadless, hasToLog, hasToG
   let browser
   if (endpoint) {
     browser = await puppeteer.connect({
-      browserWSEndpoint: endpoint,
+      browserWSEndpoint: endpoint
     })
   } else {
     const args = Object.assign({ headless: isHeadless, args: ['--no-sandbox'] }, puppeteerArgs)

@@ -18,7 +18,7 @@ module.exports = async (browser, email, password) => {
   await page.$x('//button[contains(text(), \'Sign in\')]')
     .then((button) => button[0].click())
 
-  return page.waitFor('input[role=combobox]', {
+  return page.waitFor('input[role=combobox], button[class=btn__primary--large]', {
     timeout: 15000
   })
     .then(async () => {
